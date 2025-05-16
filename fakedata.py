@@ -28,7 +28,7 @@ postgres_config = {
 }
 
 # MongoDB (microservicio 3 - reseñas)
-mongo_uri = "mongodb://localhost:27017"
+mongo_uri = "mongodb://localhost:27017/resenas_db"
 mongo_db_name = "resenas_db"
 
 # --- Conexiones ---
@@ -39,7 +39,7 @@ pg_conn = psycopg2.connect(**postgres_config)
 pg_cursor = pg_conn.cursor()
 
 mongo_client = MongoClient(mongo_uri)
-mongo_db = mongo_client[mongo_db_name]
+mongo_db = mongo_client.get_database()  # para usar la base de datos de la URI
 reviews_collection = mongo_db['reviews']
 
 # --- Microservicio 1: Poblar usuarios y roles en MySQL ---
